@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <h2 class="mb-4">{{ username }}'s Portfolio</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Current Price</th>
+                <th>Total Value</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock["symbol"] }}</td>
+                    <td>{{ stock["shares"] }}</td>
+                    <td>${{ "%.2f"|format(stock["buy_price"]) }}</td>
+                    <td>${{ "%.2f"|format(stock["total"]) }}</td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td colspan="3"><strong>Cash</strong></td>
+                <td><strong>${{ "%.2f"|format(cash) }}</strong></td>
+            </tr>
+
+            <tr>
+                <td colspan="3"><strong>Grand Total</strong></td>
+                <td><strong>${{ "%.2f"|format(grand_total) }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="mt-4">
+        <a href="/quote" class="btn btn-primary">Quote</a>
+        <a href="/buy" class="btn btn-success">Buy</a>
+        <a href="/sell" class="btn btn-danger">Sell</a>
+        <a href="/history" class="btn btn-secondary">History</a>
+    </div>
+
+{% endblock %}
